@@ -1,0 +1,17 @@
+@import "tailwindcss";
+
+@theme {
+  --color-gold-400: #e8c678;
+  --color-gold-500: #C5A059;
+  --color-gold-600: #a38244;
+  --color-charcoal-800: #222222;
+  --color-charcoal-900: #0F0F0F;
+  --color-charcoal-950: #0A0A0A;
+
+  --font-sans: var(--font-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-serif: var(--font-serif), ui-serif, Georgia, serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
