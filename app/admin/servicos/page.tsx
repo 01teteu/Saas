@@ -88,14 +88,14 @@ export default function ServicosPage() {
             setEditId(null);
             setShowForm(true);
           }} 
-          className="flex items-center justify-center gap-2 px-4 py-2 bg-gold-500 text-black border border-gold-500 text-[10px] uppercase font-bold tracking-tighter hover:bg-gold-600 transition-colors"
+          className="flex items-center justify-center gap-2 px-4 py-2 min-h-[44px] touch-manipulation bg-gold-500 text-black border border-gold-500 text-[10px] uppercase font-bold tracking-tighter hover:bg-gold-600 transition-colors"
         >
           <Plus className="w-4 h-4" /> Novo Serviço
         </button>
       </div>
 
       <div className="bg-[#0F0F0F] border border-[#222]">
-        <div className="overflow-x-auto">
+        <div className="hidden md:block overflow-x-auto">
           <table className="w-full text-left text-sm text-[#888]">
             <thead className="bg-[#0A0A0A] text-[#666] border-b border-[#222]">
               <tr>
@@ -202,7 +202,7 @@ export default function ServicosPage() {
                       <p className="font-bold text-white text-sm uppercase">{svc.nome}</p>
                       <p className="text-[10px] text-[#555] font-mono mt-0.5">{svc.duracao} · {svc.preco}</p>
                     </div>
-                    <button onClick={() => toggleAtivo(svc.id)} className={`text-[9px] px-2 py-1 border font-bold uppercase touch-manipulation ${
+                    <button onClick={() => toggleAtivo(svc.id)} className={`text-[9px] px-3 min-h-[44px] flex items-center justify-center border font-bold uppercase touch-manipulation ${
                       svc.ativo ? 'bg-gold-500/10 text-gold-500 border-gold-500/20' : 'bg-[#222] text-[#888] border-[#333]'
                     }`}>
                       {svc.ativo ? 'Ativo' : 'Inativo'}
@@ -240,7 +240,7 @@ export default function ServicosPage() {
           <div className="bg-charcoal-950 border border-[#222] p-8 w-full max-w-lg">
             <div className="flex justify-between items-center mb-6">
               <h2 className="font-serif text-2xl text-white">Novo Serviço</h2>
-              <button onClick={() => setShowForm(false)} className="text-[#666] hover:text-white"><X className="w-6 h-6" /></button>
+              <button onClick={() => setShowForm(false)} className="text-[#666] hover:text-white min-h-[44px] min-w-[44px] flex items-center justify-center touch-manipulation"><X className="w-6 h-6" /></button>
             </div>
             
             <form onSubmit={submitForm} className="space-y-4">
@@ -274,7 +274,7 @@ export default function ServicosPage() {
                 </select>
               </div>
               
-              <button type="submit" className="w-full bg-gold-500 text-black font-bold text-sm uppercase tracking-widest py-4 hover:bg-gold-400 transition-colors mt-4">
+              <button type="submit" className="w-full min-h-[44px] touch-manipulation bg-gold-500 text-black font-bold text-sm uppercase tracking-widest py-4 hover:bg-gold-400 transition-colors mt-4">
                 Confirmar
               </button>
             </form>

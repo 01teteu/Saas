@@ -2,17 +2,17 @@
 
 import Image from "next/image";
 import Link from "next/link";
-import { Scissors, Calendar, MapPin, Clock, User, Phone, Check, CheckCircle, AlertTriangle } from "lucide-react";
-import * as motion from "motion/react-client";
+import { Scissors, Calendar, MapPin, Clock, User, Phone, Check, CheckCircle, AlertTriangle, Menu, X } from "lucide-react";
+import { motion } from "motion/react";
 import { useState, useEffect } from "react";
 import { galeriaUrls, barbeiros } from "@/lib/data";
 import { getServicos, adicionarSolicitacao, HORARIOS, limiteBatido, getSolicitacaoPorId } from "@/lib/store";
 import { Servico, Solicitacao } from "@/lib/types";
 
 const gallery = [
-  { src: '/galeria-1.png', alt: 'Allan Duque em atendimento na Mr. Duque Barbearia' },
-  { src: '/galeria-2.png', alt: 'Corte infantil na Mr. Duque Barbearia' },
-  { src: '/galeria-3.png', alt: 'Corte degradê com design na Mr. Duque Barbearia' },
+  { src: '/barbearia_limpo.png', alt: 'Allan Duque em atendimento na Mr. Duque Barbearia' },
+  { src: '/corte_infantil_limpo_v2.png', alt: 'Corte infantil na Mr. Duque Barbearia' },
+  { src: '/corte_cabelo_limpo.png', alt: 'Corte degradê com design na Mr. Duque Barbearia' },
 ];
 
 const getBarbeariaAberta = () => {
@@ -70,6 +70,7 @@ export default function LandingPage() {
   const [isClient, setIsClient] = useState(false);
   const [mostrarWhatsApp, setMostrarWhatsApp] = useState(false);
   const [limiteBloqueado, setLimiteBloqueado] = useState(false);
+  const [menuMobileAberto, setMenuMobileAberto] = useState(false);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -382,7 +383,7 @@ export default function LandingPage() {
                 MR
               </span>
             </div>
-            <span className="hidden sm:block">MR. DUQUE</span>
+            <span className="hidden sm:block text-lg md:text-2xl">MR. DUQUE</span>
           </div>
           <nav className="hidden md:flex gap-8 text-[11px] uppercase tracking-widest font-semibold text-[#888]">
             <a href="#servicos" className="hover:text-white transition-colors cursor-pointer">Serviços</a>
@@ -390,10 +391,46 @@ export default function LandingPage() {
             <a href="#galeria" className="hover:text-white transition-colors cursor-pointer">Galeria</a>
             <a href="#localizacao" className="hover:text-white transition-colors cursor-pointer">Localização</a>
           </nav>
-          <a href="#agendar" className="bg-gold-500 text-charcoal-950 px-4 py-2 text-[9px] md:px-6 md:py-2.5 md:text-[10px] font-bold uppercase tracking-widest hover:bg-gold-400 transition-all border border-gold-500 touch-manipulation cursor-pointer">
-            Agendar Agora
-          </a>
+          
+          <div className="flex items-center gap-3">
+            <a href="#agendar" className="bg-gold-500 text-charcoal-950 px-4 py-2 text-[9px] md:px-6 md:py-2.5 md:text-[10px] font-bold uppercase tracking-widest hover:bg-gold-400 transition-all border border-gold-500 touch-manipulation cursor-pointer">
+              Agendar Agora
+            </a>
+            <button
+              onClick={() => setMenuMobileAberto(!menuMobileAberto)}
+              className="md:hidden w-10 h-10 flex items-center justify-center border border-[#333] text-[#888] hover:border-gold-500 hover:text-gold-500 transition-colors flex-shrink-0"
+            >
+              {menuMobileAberto ? <X className="w-4 h-4" /> : <Menu className="w-4 h-4" />}
+            </button>
+          </div>
         </div>
+
+        {menuMobileAberto && (
+          <>
+            <div
+              className="md:hidden fixed inset-0 z-30 bg-black/40"
+              onClick={() => setMenuMobileAberto(false)}
+            />
+            <div className="md:hidden fixed top-20 left-0 w-full bg-charcoal-950 border-b border-[#222] z-40 py-2">
+              {[
+                { href: '#servicos', label: 'Serviços' },
+                { href: '#sobre', label: 'Sobre' },
+                { href: '#galeria', label: 'Galeria' },
+                { href: '#localizacao', label: 'Localização' },
+                { href: '#agendar', label: 'Agendar Agora' },
+              ].map(item => (
+                <a
+                  key={item.href}
+                  href={item.href}
+                  onClick={() => setMenuMobileAberto(false)}
+                  className="block px-6 py-4 text-[11px] uppercase tracking-widest font-semibold text-[#888] hover:text-white hover:bg-[#111] border-b border-[#111] last:border-b-0 transition-colors"
+                >
+                  {item.label}
+                </a>
+              ))}
+            </div>
+          </>
+        )}
       </header>
 
       {/* STATUS BANNER */}
@@ -512,14 +549,24 @@ export default function LandingPage() {
       viewport={{ once: true }}
       className="relative h-[500px] md:h-[600px]"
     >
-      <img
-        src="/allan-duque.png"
-        alt="Allan Duque — Fundador da Barbearia Mr. Duque"
-        className="absolute inset-0 w-full h-full object-cover object-top"
-      />
+      <div style={{ position: 'relative', height: '600px', width: '100%' }}>
+        <img
+          src="/barbeiro_principal_limpo-1.png"
+          alt="Allan Duque — Fundador da Barbearia Mr. Duque"
+          style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover', objectPosition: 'top' }}
+        />
+      </div>
       <div className="absolute inset-0 border-2 border-gold-500/50 m-6 pointer-events-none" />
-      <div className="absolute bottom-6 left-6 bg-charcoal-950/90 border border-gold-500/30 p-4 backdrop-blur-sm">
-        <p className="font-serif text-white text-lg">Allan Duque</p>
+      <div 
+        style={{ 
+          position: 'absolute', 
+          bottom: '16px', 
+          left: '16px',
+          right: '16px'
+        }}
+        className="bg-charcoal-950/90 border border-gold-500/30 p-4 backdrop-blur-sm"
+      >
+        <p className="font-serif text-white text-base md:text-lg">Allan Duque</p>
         <p className="text-[10px] uppercase tracking-widest text-gold-500 mt-1">
           Fundador & Barbeiro
         </p>
@@ -549,7 +596,7 @@ export default function LandingPage() {
                 <img
                   src={item.src}
                   alt={item.alt}
-                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                  style={{ position: 'absolute', top: 0, left: 0, width: '100%', height: '100%', objectFit: 'cover' }}
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 
