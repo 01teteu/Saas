@@ -15,8 +15,13 @@ import {
 import type { Solicitacao } from '@/lib/types';
 
 export default function ClientesPage() {
+  const [mounted, setMounted] = useState(false);
   const [solicitacoes, setSolicitacoes] = useState<Solicitacao[]>([]);
   const [busca, setBusca] = useState("");
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const carregarDados = () => {
     setSolicitacoes(getSolicitacoes());
@@ -97,6 +102,8 @@ export default function ClientesPage() {
     s.cliente.toLowerCase().includes(busca.toLowerCase()) ||
     s.whatsapp.includes(busca)
   );
+
+  if (!mounted) return null;
 
   return (
     <div className="space-y-8 pb-12">

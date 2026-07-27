@@ -64,6 +64,8 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
     }
   };
 
+  if (!isClient) return null;
+
   return (
     <div className="min-h-screen bg-[#222] text-white flex font-sans selection:bg-gold-500/30">
       {/* Overlay — aparece atrás da sidebar quando aberta */}

@@ -135,9 +135,14 @@ function HistoricoEntradas() {
 }
 
 export default function FinanceiroPage() {
+  const [mounted, setMounted] = useState(false);
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
   const [confirmandoEncerramento, setConfirmandoEncerramento] = useState(false);
   const [historico, setHistorico] = useState<RegistroTurno[]>([]);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -194,6 +199,8 @@ export default function FinanceiroPage() {
     { title: 'Ticket Médio', value: `R$ ${ticketMedio.toFixed(2).replace('.', ',')}`, icon: Award },
     { title: 'Atendimentos', value: String(concluidos.length), icon: Calendar },
   ];
+
+  if (!mounted) return null;
 
   return (
     <div className="flex flex-col gap-6 md:gap-8 p-4 md:p-6 lg:p-8 pb-12">

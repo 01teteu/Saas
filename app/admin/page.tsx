@@ -33,11 +33,16 @@ const isDiaFolga = (): boolean => {
 };
 
 export default function AdminDashboard() {
+  const [mounted, setMounted] = useState(false);
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
   const [servicos, setServicos] = useState<Servico[]>([]);
   const [limite, setLimite] = useState<number | null>(null);
   const [novoLimite, setNovoLimite] = useState('');
   const [isAbertaManual, setIsAbertaManual] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -105,6 +110,8 @@ export default function AdminDashboard() {
     { title: "Agendamentos Hoje", value: agendamentosHoje.length.toString(), icon: CalendarCheck, trend: "0%" },
     { title: "Clientes Únicos", value: clientesUnicos.toString(), icon: Users, trend: "+2" },
   ];
+
+  if (!mounted) return null;
 
   return (
     <div className="flex flex-col gap-6 md:gap-8 p-4 md:p-6 lg:p-8">

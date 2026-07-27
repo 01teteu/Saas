@@ -30,11 +30,16 @@ const ordenarAgendamentos = (lista: Agendamento[]): Agendamento[] => {
 };
 
 export default function AgendamentosPage() {
+  const [mounted, setMounted] = useState(false);
   const [agendamentos, setAgendamentos] = useState<Agendamento[]>([]);
   const [busca, setBusca] = useState("");
   const [filtroData, setFiltroData] = useState<string>("Todos");
   const [filtroStatus, setFiltroStatus] = useState<string>("Todos");
   const [confirmandoExclusao, setConfirmandoExclusao] = useState<string | null>(null);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   const carregarDados = () => {
     setAgendamentos(getAgendamentos());
@@ -98,6 +103,8 @@ export default function AgendamentosPage() {
   );
 
   let primeiroHojePassou = false; // Flag para destacar apenas o primeiro que não passou ainda
+
+  if (!mounted) return null;
 
   return (
     <div className="space-y-8 pb-12">

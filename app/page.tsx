@@ -103,7 +103,7 @@ export default function LandingPage() {
     return "Fechados no momento · Voltamos amanhã às 08:00";
   };
 
-  const numeroBarba = '5581996652122';
+  const numeroBarba = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5581996652122';
 
   const validarNome = (valor: string): string => {
     const limpo = valor.trim();
@@ -156,7 +156,7 @@ export default function LandingPage() {
 
   const montarMensagemWhatsApp = () => {
     const { nome, data, horario } = formData;
-    const numeroBarba = '5581996652122'; // Mr. Duque — número real
+    const numeroBarba = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5581996652122'; // Mr. Duque — número real
 
     // Monta os serviços selecionados
     const servicosSelecionadosNomes = servicos
@@ -173,7 +173,7 @@ export default function LandingPage() {
         `\nEstou aguardando a confirmação. 🙏`
       : `Olá, Mr. Duque! 👋\n\nGostaria de agendar um horário. Podem me ajudar?`;
 
-    const url = `https://wa.me/5581996652122?text=${encodeURIComponent(mensagem)}`;
+    const url = `https://wa.me/${numeroBarba}?text=${encodeURIComponent(mensagem)}`;
     window.open(url, '_blank');
   };
 
@@ -284,6 +284,8 @@ export default function LandingPage() {
     setErros({});
   };
 
+  if (!isClient) return null;
+
   return (
     <div className="min-h-screen bg-charcoal-950 text-slate-300 font-sans selection:bg-gold-500/30">
       
@@ -351,7 +353,7 @@ export default function LandingPage() {
                   Entre em contato pelo WhatsApp para reagendar.
                 </p>
                 <a
-                  href={`https://wa.me/5581996652122`}
+                  href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5581996652122'}`}
                   target="_blank"
                   className="inline-block mt-3 bg-gold-500 text-black text-[10px] font-bold uppercase tracking-widest px-4 py-2 hover:bg-gold-400 transition-colors"
                 >
@@ -809,7 +811,7 @@ export default function LandingPage() {
                   </div>
                   <div>
                     <p className="text-slate-400 text-sm mb-1">Dúvidas ou agendamentos?</p>
-                    <a href={`https://wa.me/5581996652122`} target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-gold-500 transition-colors">
+                    <a href={`https://wa.me/${process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || '5581996652122'}`} target="_blank" rel="noopener noreferrer" className="text-white font-medium hover:text-gold-500 transition-colors">
                       (81) 99665-2122
                     </a>
                   </div>
